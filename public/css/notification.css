@@ -1,0 +1,141 @@
+@import url(http://fonts.googleapis.com/css?family=Average+Sans);
+
+body {
+  font-family: 'Arial';
+}
+#top {
+  position: relative;
+  width: 100%;
+  height: 70px;
+  margin-top:20px;
+  margin-right:10px;
+}
+#orange {
+  border-radius: 1px;
+  position: relative;
+  top: 25%;
+  left: 50%;
+  margin-left:-20px;
+  width: 40px;
+  height: 40px;
+  background :#43bac6;
+  /*background: #e76853;*/
+}
+#orange img {
+  width: 40px;
+}
+#notification {
+  position: relative;
+  left: 155px;
+  top: -30px;
+  border-radius: 50%;
+  border: 2px solid #FFF;
+  width: 23px;
+  height: 23px;
+  background: #e76853;
+  color:white;
+  text-align: center;
+}
+#bottom {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  text-align: center;
+  color:white;
+  float:left;
+  word-wrap: break-word;
+}
+#triangle-line {
+  width: 100%;
+  height: 20px;
+}
+#tri {
+  position: relative;
+  left: 140px;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 0 10px 20px 10px;
+  border-color: transparent transparent #e76853 transparent;
+}
+#nots {
+  line-height: 35px;
+  width: 100%;
+  height: 35px;
+  background: #e76853;
+}
+#info {
+  line-height: 55px;
+  width: 100%;
+  height: auto;
+  background: white;
+  border-right:1px solid #e5e5e5;
+  border-left:1px solid #e5e5e5;
+  float:left;
+}
+/*info ul li*/
+#info ul
+{
+  width:100%;
+  word-wrap: break-word;
+  float:left;
+  style:none;
+}
+#info ul li
+{
+  width:100%;
+  height:auto;
+  border-bottom: 1px solid #e5e5e5;
+  word-wrap: break-word;
+  float:left;
+  list-style: none;
+}
+#info ul li:hover
+{
+  cursor:pointer;
+  background:#f9f9f9;
+}
+#info ul li:last-child
+{
+  border-bottom:0px;
+}
+#info ul li a
+{
+  float:left;
+  text-decoration:none;
+  word-wrap: break-word;
+}
+#info ul li img
+{
+  float:left;
+  margin-top:15px;
+  margin-left:5px;
+  margin-right:10px;
+}
+#info ul li i
+{
+  float:left;
+  color:gray;
+  margin-top:-30px;
+}
+#feet {
+  width: 100%;
+  height: 35px;
+  background: #e76853;
+  float:left;
+}
+#feet p
+{
+  color:white;
+  margin-top:5px;
+}
+#feet p a
+{
+  text-decoration: none;
+  color:white;
+}
+#feet p a:hover
+{
+  text-decoration: underline;
+}
+/*noti number*/

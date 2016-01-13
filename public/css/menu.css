@@ -1,0 +1,10 @@
+.menu ul li a span
+{
+  float:left;
+  padding:5px 10px 5px 10px;
+  background:#e76853;
+  color:white;
+  margin-left:-10px;
+  margin-right:5px;
+  border-radius: 100%;
+}

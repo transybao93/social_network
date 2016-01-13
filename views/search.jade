@@ -1,0 +1,46 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    |     
+    title Search user
+    |     
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans|Maven+Pro:500', rel='stylesheet', type='text/css')
+    |     
+    link(rel='stylesheet', href='/css/search_page.css')
+    script(src='//code.jquery.com/jquery-1.11.3.min.js')
+    script(type='text/javascript', src='/js/search_page.js')
+  |   
+  body
+    section.list-wrap
+      label(for='search-text') Search for 
+        b User
+      form#search-form       
+        input#search-text.search-box(type='text', autofocus="autofocus")
+      |       
+      span.list-count
+      p 
+        em(style="color:gray") Press 'Enter' to search
+      |       
+      ul#list
+        for u in user
+          li.in 
+            a(href="javascript:void(0)", name="#{u._id}") #{u.ten}
+  script(src='//code.jquery.com/jquery-1.11.3.min.js')
+  script(src='/socket.io/socket.io.js')
+  script(type='text/javascript').
+    $(document).ready(function()
+    {
+      var socket = io.connect();
+      var mess = $('#search-text');
+      var search_form = $('#search-form');
+      search_form.bind('submit',function(e){
+        e.preventDefault();
+        $(window).attr('location','/search/'+mess.val().trim());
+        mess.val('');
+      });
+      
+      $('#list li a').click(function(e){
+        $(window).attr('location','/profile/'+$(this).attr('name'));
+      });
+    });

@@ -1,0 +1,162 @@
+body {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 1em;
+  color: #646464;
+}
+
+.card {
+  margin: 0 auto;
+  width: 400px;
+  box-shadow: 0px 3px 5px rgba(30, 30, 30, 0.2);
+  border-radius: 3px;
+  background-color: white;
+}
+
+.title {
+  margin: 0;
+  padding: 20px 20px 10px;
+  font-size: 4.8em;
+  font-weight: 400;
+  text-align: center;
+  color: #00b45a;
+}
+
+.login {
+  padding: 25px 25px 10px 25px;
+}
+
+.info {
+  padding: 0 25px 10px 25px;
+  font-size: 0.85em;
+  text-align: center;
+}
+.info a {
+  color: #008141;
+  text-decoration: none;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+}
+.info a:hover{
+  color: #044625;
+}
+.info a::after {
+  content: " or ";
+  color: #646464;
+  margin: 0 10px;
+}
+.info a:last-child::after {
+  content: "";
+}
+
+fieldset {
+  padding: 0;
+  margin-bottom: 40px;
+  border: none;
+  position: relative;
+}
+
+label {
+  position: absolute;
+  pointer-events: none;
+  font-size: 1em;
+  top: 7px;
+  -webkit-transition: top 0.2s, font-size 0.2s, color 0.2s;
+  transition: top 0.2s, font-size 0.2s, color 0.2s;
+}
+
+.underline {
+  width: 100%;
+}
+
+.underline::before,
+.underline::after {
+  position: absolute;
+  content: "";
+  top: 30px;
+  width: 0%;
+  height: 3px;
+  opacity: 0;
+  background-color: #00b45a;
+  -webkit-transition: width 0.2s, opacity 0.2s;
+  transition: width 0.2s, opacity 0.2s;
+}
+
+.underline::before {
+  right: 50%;
+}
+
+.underline::after {
+  left: 50%;
+}
+
+input {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 7px 0;
+  border-top: none;
+  border-right: none;
+  border-bottom: 1px solid #c8c8c8;
+  border-left: none;
+  font-weight: 100;
+  font-size: 1em;
+}
+input:focus {
+  outline: none;
+}
+input:focus ~ .underline::before, input:focus ~ .underline::after {
+  opacity: 1;
+  width: 50%;
+}
+input:focus + label {
+  color: #00b45a;
+}
+
+input:focus + label,
+input.filled + label {
+  font-size: 0.9em;
+  top: -15px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  background-color: #00b45a;
+  border-radius: 3px;
+  color: #f0f0f0;
+  box-shadow: 0 2px 6px rgba(100, 100, 100, 0.6);
+  -webkit-transition: background-color 0.2s, box-shadow 0.2s;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  font-size: 1.2em;
+  cursor:pointer;
+}
+button:hover{
+  background:#05c364;
+}
+button:focus, button:active {
+  outline: none;
+}
+button:active {
+  box-shadow: 0 4px 10px rgba(100, 100, 100, 0.8);
+}

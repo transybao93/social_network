@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    |     
+    link(rel='stylesheet', href='/css/profile.css', media='screen', title='no title', charset='utf-8')
+    |     
+    title Profile details
+  |   
+  body
+    figure.snip0057.blue
+      figcaption
+        h2
+          b #{user.ten}&nbsp;
+        |         
+        p Age : #{user.tuoi}
+        p School : #{user.truong}
+        p Email : #{user.email}
+        p City : #{user.thanhpho}
+        |         
+        .icons
+          a(href='#', title="Add friend")
+            i.ion-android-person-add
+          a(href='/', title="Return homepage")
+            i.ion-ios-home
+          a(href='#', title="Chat with me")
+            i.ion-ios-chatbubble
+          a(href='#', title="My friend")
+            i.ion-ios-people
+          a(href='#', title="My galery")
+            i.ion-images
+          //- a(href='#', title="Edit profile")
+          //-   i.ion-edit
+      |       
+      .image
+        img(src='/images/profile2.jpg', alt='#{user.ten}', width="440", height="440")
+      |       
+      .position #{user.language}

@@ -1,0 +1,23 @@
+{
+    "name": "SocialNetwork",
+    "version": "1.0.0",
+    "description": "Simple Social Network",
+    "dependencies": {
+        "socket.io": "latest",
+        "express": "latest",
+        "jade": "latest",
+        "mongoose": "latest",
+        "express-session" : "latest",
+        "body-parser" : "latest"
+    },
+    "engines": {
+      "npm":"2.11.3",
+      "node": "0.12.7"
+    },
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start":"node server.js"
+    },
+    "author": "Tran Sy Bao",
+    "license": "ISC"
+}

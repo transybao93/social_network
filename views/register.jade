@@ -1,0 +1,110 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    |     
+    title Welcome to Ginger | Register
+    |     
+    link(rel='stylesheet', href='/css/login.css', media='screen', title='no title', charset='utf-8')
+    script(src='http://code.jquery.com/jquery-1.11.1.js')       
+    script(type='text/javascript', src='/js/homepage_animation.js')
+    script(type='text/javascript', src='/js/toast/toastr.js')  
+    script(type='text/javascript', src='/js/login.js') 
+  body
+    .card
+      .title
+        img(src="/images/logo/logo2.png")
+      |       
+      .login
+        form
+          fieldset
+            input#username.username(type='text', name="u_name")
+            |           
+            label(for='username') Username
+            |           
+            .underline
+          fieldset
+            input#email.username(type='text', name="u_email")
+            |           
+            label(for='username') Email
+            |           
+            .underline
+          |        
+          fieldset
+            input#password.password(type='password', name="u_password")
+            |           
+            label(for='password') Password
+            |           
+            .underline
+          fieldset
+            input#repass.password(type='password', name="repass")
+            |           
+            label(for='password') Confirm password
+            |                   
+            .underline
+          |     
+          p.info
+            a.link(href='#') Rules, term of use, security policy and how our social network operating.
+          button.submit Register
+              
+  script(src='//code.jquery.com/jquery-1.11.3.min.js')
+  script(src='/socket.io/socket.io.js')
+  script(type='text/javascript').
+    $(document).ready(function()
+    {
+      var register_form = $('form');
+      //send request to server
+      
+      register_form.submit(function(e){
+        e.preventDefault();
+        //bắt lỗi
+        var username = $("input[name='u_name']");
+        var email = $("input[name='u_email']");
+        var pass = $("input[name='u_password']");
+        var repass = $("input[name='repass']");
+        if(username.val() == '' || email.val() == '' || pass.val() == '' || repass.val() == '' || repass.val() != pass.val() ||(username.val() == '' && email.val() == '' && pass.val() == '' && repass.val() == '' && repass.val() != pass.val()))
+        {
+          if(username.val() == '')
+          {
+            username.focus();
+            return false;
+          }
+          if(email.val() == '')
+          {
+            email.focus();
+            return false;
+          }
+          if(pass.val() == '')
+          {
+            pass.focus();
+            return false;
+          }
+          if(repass.val() == '')
+          {
+            repass.focus();
+            return false;
+          }
+          if(repass.val() != pass.val())
+          {
+            repass.focus();
+            return false;
+          }
+        }else{
+        //send về server
+          $.post("http://localhost:8888/register",{name: username.val(), email: email.val(), pass: pass.val()}, function(data){
+            if(data==='done')
+              {
+                $(location).attr('href','/');
+                return false;
+                //alert("login success");
+              }else{
+                email.focus();
+                alert('This email has already been used ! Please try another or click Forgot your password link !');
+              }
+          });
+        }
+        
+      });
+      
+      
+    });

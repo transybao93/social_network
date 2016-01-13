@@ -1,0 +1,199 @@
+doctype html
+html
+  title Ginger
+  link(rel='stylesheet', href='/css/style.css', media='screen', title='no title', charset='utf-8')
+  link(rel='stylesheet', href='/css/search.css', media='screen', title='no title', charset='utf-8')
+  link(rel='stylesheet', href='/css/notification.css', media='screen', title='no title', charset='utf-8')
+  link(rel='stylesheet', href='/css/minimenu.css', media='screen', title='no title', charset='utf-8')
+  link(rel='stylesheet', href='/css/menu.css', media='screen', title='no title', charset='utf-8')
+  link(href='/css/toast/toastr.css', rel='stylesheet')
+  script(type='text/javascript', src='/js/index.js')
+  script(type='text/javascript', src='/js/search.js')
+  script(src='http://code.jquery.com/jquery-1.11.1.js')    
+  script(type='text/javascript', src='/js/homepage_animation.js')
+  script(type='text/javascript', src='/js/toast/toastr.js')
+  //- script(src='http://code.jquery.com/jquery-1.11.1.js')
+  //- script(src='https://cdn.socket.io/socket.io-1.2.0.js')
+  //- script(src='/socket.io/socket.io.js')
+  script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js")
+  link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet")
+  body
+    //- p #{json.message}
+    //- each val, key in json
+    //-   p #{key}: #{val}
+    //- - for( var data in json)
+    //-   p #{data.title}
+    //- ul
+    //-   - for( var data in myData )
+    //-       li= myData.tieude
+      
+    //- p #{myData} 
+    .user_info
+      div.personal
+        img(src="images/user2.png")
+        p#uname === #{uname} ===
+        div.write_post
+          p How do you feel today?
+          form
+            input(type="text")
+            input(type="submit" value="Post")
+        div.edit
+          p 
+            img(src="images/edit.png")
+            span Edit profile 
+        div.logout
+          p 
+            img(src="images/logout.png")  
+            span Logout
+    .menu
+      ul
+        li
+          a(href="hehe")
+            img(src='images/notification/people.png')
+            span 3
+        li
+          a(href="hihi")
+            img(src='images/notification/message.png')
+            span 4
+        li
+          a(href="haha")
+            img(src='images/notification/post.png')
+            span 5
+    .wrap_content 
+      #mini_menu
+        ul
+          li 
+            a(href="#") Home
+          li 
+            a(href="#") About  
+          li 
+            a(href="#") Contact
+          li
+            a(href="#") Math
+      .logo
+        img(src="/images/logo/logo2.png", alt="logo" width='138' height='115')
+      form.search-wrap#search-form
+        input#search-box.search-box(type='text', name='q', placeholder="Searching user")
+        |   
+        label(for='search-box')
+          span.glyphicon.glyphicon-search.search-icon
+        |   
+        input#search-submit(type='submit')
+      //- for (var i=0; i<10; i++)
+      for post, i in docs
+        -if (post.type == "baiviet")
+          .wrapper
+            div.post
+              p(style="padding-left:10px;padding-top:10px;padding-right:10px") 
+                a(href="/profile/#{post.nguoiviet.toObject()._id}") #{post.nguoiviet.toObject().ten}
+              p(style="padding-left:10px;padding-right:10px") 
+                i(style="font-size:0.8em;font-style:italic") #{post.ngayviet}
+              p(style="padding-left:10px;padding-right:10px")  #{post.noidung}
+              a.btn_like(href='javascript:void(0)', name="#{post.nguoiviet.toObject()._id}/#{post._id}") Like 
+                -var count = 0;
+                each l in like
+                  -if(String(post._id) == String(l.postID))
+                    -count++
+                span (#{count})
+              a.btn_comment(href='javascript:void(0)') Comment (2)
+              div.comment_area
+                div.comment_input
+                  input#txt_input(type="text")
+                div.comment_list
+                  div.single_comment
+                    p
+                      a(href="javascript:void(0)") Bảo 
+                      | hehe   
+    script(src='//code.jquery.com/jquery-1.11.3.min.js')
+    script(src='/socket.io/socket.io.js')
+    script(type='text/javascript').
+      $(document).ready(function()
+      {
+        //testing toast
+        toastr.options = {
+          "closeButton": true,
+          "debug": false,
+          "newestOnTop": true,
+          "progressBar": false,
+          "positionClass": "toast-bottom-right",
+          "preventDuplicates": true,
+          "onclick": null,
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "timeOut": "3000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }
+        var socket = io.connect();
+        var search_form = $('#search-form');
+        var mess = $('.search-box');
+        var notification = $('#info ul li');
+        mess.click(function(){
+          toastr.success('My name is Inigo Montoya. You killed my father, prepare to die!', 'Thông báo', {timeOut: 3000});
+        });
+        //gửi data lên server.js
+        search_form.submit(function(e){
+          e.preventDefault();
+          $(window).attr('location','/search/'+mess.val().trim());
+          mess.val('');
+        });
+        //- send_form.submit(function(e){    
+        //-   e.preventDefault();
+        //-   socket.emit('chat message', mess.val());
+        //-   this.location.href = "/search";
+        //-   mess.val('');
+        //- });
+        //nhận tin từ server
+        
+        socket.on('new mess', function(data){
+          var count = 0;
+          var u1 = new Object();
+          for (var r in data.post) {  
+            $('<li><img src="/images/people.png" alt="" /><a href="#"><b>'+data.post[r].nguoiviet+'</b> vừa đăng một bài viết</a><br/><i>5 phút trước</i></li>').slideDown("slow").prependTo('#info ul');
+            //- alert(Object.keys(data.post[r].nguoiviet).length);
+            //- alert(data.post[r].nguoiviet);
+            
+          }
+          mess.val('Data is back !');
+          $('title').html('có tin nhắn mới');
+        });
+        var btn_like = $('.btn_like');
+        //send like to server
+        btn_like.click(function(){
+            socket.emit('like', $(this).attr('name'));
+            //alert($(this).attr('name'));
+        });
+        //receive like data response from server
+        socket.on('new like res', function(res){
+          //set data for like text
+          for(var t in res.count)
+          {
+            alert(res.count[t].postID.tieude);
+          }
+          if(res.status == 'yes')
+          {
+            toastr.success("Bảo Bảo vừa thích bài viết của bạn","Announcement",{timeout:3000});
+          }else{
+            toastr.warning("You've already liked this post !","Announcement",{timeout:3000});
+          }
+        });
+        
+        socket.on('new like res2', function(res){
+          alert(Object.keys(res.count).length);
+          if(res.status == 'yes')
+          {
+            $('.btn_like').css("color","#406ac8");
+          }
+        });
+        
+        //logout click
+        $('.logout').click(function(){
+          $(location).attr('href','/logout');
+          //alert('logout');
+        });
+        
+        
+      });

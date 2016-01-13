@@ -1,0 +1,58 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    |     
+    title Welcome to Ginger | Login
+    |     
+    link(rel='stylesheet', href='/css/login.css', media='screen', title='no title', charset='utf-8')
+    script(src='http://code.jquery.com/jquery-1.11.1.js')     
+    script(type='text/javascript', src='/js/login.js') 
+  body
+    .card
+      .title
+        img(src="/images/logo/logo2.png")
+      |       
+      .login
+        form
+          fieldset
+            input#username.username(type='text', name="u_email")
+            |           
+            label(for='username') Email
+            |           
+            .underline
+          |         
+          fieldset
+            input#password.password(type='password', name="u_password")
+            |           
+            label(for='password') Password
+            |           
+            .underline
+          |         
+          button.submit Login
+        |       
+        p.info
+          a(href='#') Forgot your password?
+          a(href='/register') Register now !
+  script(src='//code.jquery.com/jquery-1.11.3.min.js')
+  script(src='/socket.io/socket.io.js')
+  script(type='text/javascript').
+    $(document).ready(function()
+    {
+      var login_form = $('form');
+      var email = $("input[name='u_email']");
+      var pass = $("input[name='u_password']");
+      login_form.submit(function(e){
+        e.preventDefault();
+        $.post("http://localhost:8888/",{email: email.val(), pass: pass.val()}, function(data){
+          if(data === 'ok')
+          {
+            $(location).attr('href','/home');
+          }else{
+            alert('Please try again !');
+          }
+        });
+      });
+      
+      
+    });
